@@ -94,6 +94,13 @@ class Extractor:
 		for sach in ex_sacha:
 			sacha.write(sach.strip()+"\n")
 
+	def wwwEX(self):
+		www = open(sys.argv[1]+"/www.txt","a")
+		data = fileReader(self.file)
+                ex_www = list(set(re.findall(r'(?:www\.)?', data)))
+
+		for ww in ex_www:
+			www.write(ww.strip()+"\n")
 
 	def interes_files(self):
 		int_files = open(sys.argv[1]+"/DATA.txt","a")
@@ -114,4 +121,5 @@ if __name__ == '__main__':
 		EX.queriesEX()
 		EX.portsEX()
 		EX.sachaEX()
+		EX.wwwEX()
 EX.interes_files()
