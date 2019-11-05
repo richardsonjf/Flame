@@ -103,7 +103,7 @@ class Extractor:
 			www.write(ww.strip()+"\n")
 
 	def interes_files(self):
-		int_files = open(sys.argv[1]+"/DATA.txt","a")
+		int_files = open(sys.argv[1]+"/userpass.txt","a")
 		words = ['base_url',"ftp_","db_","user","pass","user_pass","user_name","smtp_","passwd","mysql://","ftp://"]
 		data = fileReader(self.file)
 		for word in words:
