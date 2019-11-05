@@ -18,7 +18,7 @@ and more...
 
 # Interface
 <div align="center">
-    <img src="https://i.ibb.co/VmzRBC3/t1.png" width="400px"</img> 
+    <img src="https://i.ibb.co/ym9KKMp/flame.png" width="400px"</img> 
 </div>
 
 
