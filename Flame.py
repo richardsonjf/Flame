@@ -33,7 +33,7 @@ class Extractor:
 		self.file = file
 
 	def emailEX(self):
-		emails = open(sys.argv[1]+"/EX_EMAILS.txt","a")
+		emails = open(sys.argv[1]+"/emails.txt","a")
 		data = fileReader(self.file)
 		ex_emails= list(set(re.findall(r'[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+', data)))
 
@@ -44,10 +44,9 @@ class Extractor:
                                 emails.write(email.strip()+"\n")
 
 	def urlsEX(self):
-		urls = open(sys.argv[1]+"/URLS.txt","a")
+		urls = open(sys.argv[1]+"/urls.txt","a")
 		data = fileReader(self.file)
-#                ex_urls = list(set(re.findall(r'(?:|api?|www?|http?|https?|ftp):\/\/[\w/\-?=%.]+\.[\w/\-?=%.]+', data)))
-                ex_urls = list(set(re.findall(r'(?:(\/\S+))*', data)))
+                ex_urls = list(set(re.findall(r'(?:www?|http?|https?|ftp):\/\/[\w/\-?=%.]+\.[\w/\-?=%.]+', data)))
 
 		for url in ex_urls:
 			if len(url) < 2:
@@ -56,44 +55,44 @@ class Extractor:
 				urls.write(url.strip()+"\n")
 
 	def ipsEX(self):
-		ips = open(sys.argv[1]+"/IPS.txt","a")
+		ips = open(sys.argv[1]+"/ip.txt","a")
 		data = fileReader(self.file)
-                ex_ips = list(set(re.findall(r'|(?:\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})', data)))
+                ex_ips = list(set(re.findall(r'(?:\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})', data)))
 
 		for ip in ex_ips:
 			ips.write(ip.strip()+"\n")
 
 	def domainsEX(self):
-		ips = open(sys.argv[1]+"/DOMAINS.txt","a")
+		domains = open(sys.argv[1]+"/domains.txt","a")
 		data = fileReader(self.file)
-                ex_ips = list(set(re.findall(r'(?:(?:[A-Z0-9][A-Z0-9-]{0,61}[A-Z0-9]\.)+)', data)))
+                ex_domains = list(set(re.findall(r'(?:(?:[A-Z0-9][A-Z0-9-]{0,61}[A-Z0-9]\.)+)', data)))
 
-		for ip in ex_ips:
-			ips.write(ip.strip()+"\n")
+		for domain in ex_domains:
+			domains.write(domain.strip()+"\n")
 
-	def queryEX(self):
-		ips = open(sys.argv[1]+"/QUERIES.txt","a")
+	def queriesEX(self):
+		queries = open(sys.argv[1]+"/query.txt","a")
 		data = fileReader(self.file)
-                ex_ips = list(set(re.findall(r'(?:(\/\S+)*)', data)))
+                ex_queries = list(set(re.findall(r'(?:(\/\S+)*)', data)))
 
-		for ip in ex_ips:
-			ips.write(ip.strip()+"\n")
+		for query in ex_queries:
+			queries.write(query.strip()+"\n")
 
-	def portEX(self):
-		ips = open(sys.argv[1]+"/PORTS.txt","a")
+	def portsEX(self):
+		ports = open(sys.argv[1]+"/ports.txt","a")
 		data = fileReader(self.file)
-                ex_ips = list(set(re.findall(r'(?:(\/\S+)*)', data)))
+                ex_ports = list(set(re.findall(r'(?::(\d{1,5}))?', data)))
 
-		for ip in ex_ips:
-			ips.write(ip.strip()+"\n")
+		for port in ex_ports:
+			ports.write(port.strip()+"\n")
 
-	def schemeEX(self):
-		ips = open(sys.argv[1]+"/PORTS.txt","a")
+	def sachaEX(self):
+		sacha = open(sys.argv[1]+"/scheme.txt","a")
 		data = fileReader(self.file)
-                ex_ips = list(set(re.findall(r'(?:(https?|s?ftp):\/\/)?', data)))
+                ex_sacha = list(set(re.findall(r'(?:(www?|https?|s?ftp):\/\/)?', data)))
 
-		for ip in ex_ips:
-			ips.write(ip.strip()+"\n")
+		for sach in ex_sacha:
+			sacha.write(sach.strip()+"\n")
 
 
 	def interes_files(self):
@@ -108,11 +107,11 @@ class Extractor:
 if __name__ == '__main__':
 	for sl in sourcesList:
 		EX = Extractor(sl)
-		EX.urlsEX()
 		EX.emailEX()
+		EX.urlsEX()
 		EX.ipsEX()
-		EX.schemeEX()
 		EX.domainsEX()
-		EX.queryEX()
-		EX.portEX()
+		EX.queriesEX()
+		EX.portsEX()
+		EX.sachaEX()
 EX.interes_files()
