@@ -1,18 +1,26 @@
 # F.A.Q
 - Flame can extract any juicy data from any apk file
 
-# Extraction List
+# Data Extraction List
 - Endpoints
 - URLs
 - Images
 - Query paths 
 - Schemes
 - Ports
-- Inner library or folder paths 
+- API
+- Inner library 
+- Folder paths 
 - Directory locations
 - Emails
 - I.P Addresses
 and more...
+
+# Interface
+<div align="center">
+    <img src="https://i.ibb.co/VmzRBC3/t1.png" width="400px"</img> 
+</div>
+
 
 # How to Run?
 - ./Flame.sh jadx/apktool file.apk
