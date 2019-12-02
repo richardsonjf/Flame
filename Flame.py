@@ -20,7 +20,7 @@ sourcesList = []
 
 
 def fileReader(file):
-#    f = open('file', 'rb', encoding='utf-8').read()
+    #    f = open('file', 'rb', encoding='utf-8').read()
     f = open(file, encoding='utf-8').read()
     return f
 
@@ -57,7 +57,7 @@ class Extractor:
         urls = open(sys.argv[1]+"/urls.txt", "a")
         data = fileReader(self.file)
         ex_urls = list(set(re.findall(
-            r'(?:www?|http?|https?|ftp):\/\/[\w/\-?=%.]+\.[\w/\-?=%.]+', data)))
+            r'(?:http?|ftp|www):\/\/[\w/\-?=%.]+\.[\w/\-?=%.]+', data)))
 
         for url in ex_urls:
             if len(url) < 2:
@@ -66,13 +66,13 @@ class Extractor:
                 urls.write(url.strip()+"\n")
 
     def ipsEX(self):
-        ips = open(sys.argv[1]+"/ip.txt", "a")
+        ips = open(sys.argv[1]+"/EX_IPS.txt", "a")
         data = fileReader(self.file)
-        ex_ips = list(set(re.findall(
-            r'(?:\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})|[0-9]+(?:\.[0-9]+3)', data)))
+        ex_ips = list(set(re.findall(r'[0-9]+(?:\.[0-9]+){3}', data)))
+        ex_ips += list(set(re.findall(r'[0-9]+(?:\.[0-9]+){3}:[0-9]+', data)))
 
         for ip in ex_ips:
-            ips.write(ip.strip()+"\n")
+                ips.write(ip.strip()+"\n")
 
     def domainsEX(self):
         domains = open(sys.argv[1]+"/domains.txt", "a")
@@ -108,17 +108,17 @@ class Extractor:
         for sach in ex_sacha:
             sacha.write(sach.strip()+"\n")
 
-    def wwwEX(self):
-        www = open(sys.argv[1]+"/www.txt", "a")
+    def jsonEX(self):
+        json = open(sys.argv[1]+"/www.txt", "a")
         data = fileReader(self.file)
-        ex_www = list(set(re.findall(r'(?:www\.)?', data)))
+        ex_json = list(set(re.findall(r'(:\s*(.+?)\s+Source:\s*(.+?)\s+Timestamp:?<!^)Message:\s*.*', data)))
 
-        for ww in ex_www:
+        for json in ex_json:
             www.write(ww.strip()+"\n")
 
     def interes_files(self):
         int_files = open(sys.argv[1]+"/userpass.txt", "a")
-        words = ['base_url', "ftp_", "db_", "dump", "_db_", "user", "pass", "user_pass", "user_name",
+        words = ['base_url', "ftp_", "db_", "dump", "_db_", "passwd_", "user", "pass", "user_pass", "user_name",
                  "smtp_", "passwd", "_passwd", "select", "put", "edit", "add", "gopher://", "mysql://", "ftp://"]
         data = fileReader(self.file)
         for word in words:
@@ -136,5 +136,5 @@ if __name__ == '__main__':
         EX.queriesEX()
         EX.portsEX()
         EX.sachaEX()
-        EX.wwwEX()
+        EX.jsonEX()
 EX.interes_files()
