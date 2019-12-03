@@ -16,7 +16,7 @@ and more...
 
 # Interface
 <div align="center">
-    <img src="https://i.ibb.co/ym9KKMp/flame.png" width="400px"</img> 
+    <img src="https://i.ibb.co/R7NY2bm/python3-flame.png"</img> 
 </div>
 
 # Requirements
