@@ -77,7 +77,7 @@ class Extractor:
     def domainsEX(self):
         domains = open(sys.argv[1]+"/domains_names.txt", "a")
         data = fileReader(self.file)
-        ex_domains = list(set(re.findall(r'/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/img', data)))
+        ex_domains = list(set(re.findall(r'/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)?/', data)))
 
         for domain in ex_domains:
             domains.write(domain.strip()+"\n")
@@ -91,16 +91,16 @@ class Extractor:
             ports.write(port.strip()+"\n")
 
     def jsonEX(self):
-        json = open(sys.argv[1]+"/json.txt", "a")
+        json = open(sys.argv[1]+"/fuzz.txt", "a")
         data = fileReader(self.file)
-        ex_json = list(set(re.findall(r'(:\s*(.+?)\s+Source:\s*(.+?)\s+Timestamp:?<!^)Message:\s*.*', data)))
+        ex_json = list(set(re.findall(r'^(\/[a-z][a-zA-z]+)+$', data)))
 
         for json in ex_json:
             www.write(ww.strip()+"\n")
 
     def interes_files(self):
         int_files = open(sys.argv[1]+"/interestingdata.txt", "a")
-        words = ['base_url', "mode", "ftp", "_db", "\/api", "api\/", "api", "ssh", "config", "admin", "php", "db_", "dump", "_db_", "passwd_", "user", "pass", "user_pass", "user_name", "smtp_", "passwd", "_passwd", "select", "put", "edit", "add", "gopher://", "mysql://", "ftp://"]
+        words = ['base_url', "source", "Source", "Timestamp", "timestgap", "message", "Message", "mode", "ftp", "_db", "\/api", "api\/", "api", "ssh", "config", "admin", "php", "db_", "dump", "_db_", "passwd_", "user", "pass", "user_pass", "user_name", "smtp_", "passwd", "_passwd", "select", "put", "edit", "add", "gopher://", "mysql://", "ftp://"]
         data = fileReader(self.file)
         for word in words:
             if word.upper() in data or word.lower() in data:
@@ -114,8 +114,6 @@ if __name__ == '__main__':
         EX.urlsEX()
         EX.ipsEX()
         EX.domainsEX()
-#        EX.queriesEX()
         EX.portsEX()
-#        EX.sachaEX()
         EX.jsonEX()
 EX.interes_files()
