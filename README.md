@@ -1,12 +1,10 @@
 # F.A.Q
-- Flame can extract any juicy data from any apk file
+- Flame can decompile and extract APK Data
 
 # Data Extraction List
 - Endpoints
 - URLs
-- Images
 - Query paths 
-- Schemes
 - Ports
 - API
 - Inner library 
@@ -21,6 +19,8 @@ and more...
     <img src="https://i.ibb.co/ym9KKMp/flame.png" width="400px"</img> 
 </div>
 
+# Requirements
+- python3 
 
-# How to Run?
-- ./Flame.sh jadx/apktool file.apk
+# Run
+- ./Flame.sh jadx/apktool andoird_file_here.apk
