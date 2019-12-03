@@ -54,7 +54,7 @@ class Extractor:
                 emails.write(email.strip()+"\n")
 
     def urlsEX(self):
-        urls = open(sys.argv[1]+"/urls.txt", "a")
+        urls = open(sys.argv[1]+"/url.txt", "a")
         data = fileReader(self.file)
         ex_urls = list(set(re.findall(
             r'(?:http?|ftp|www):\/\/[\w/\-?=%.]+\.[\w/\-?=%.]+', data)))
@@ -66,7 +66,7 @@ class Extractor:
                 urls.write(url.strip()+"\n")
 
     def ipsEX(self):
-        ips = open(sys.argv[1]+"/EX_IPS.txt", "a")
+        ips = open(sys.argv[1]+"/ip_addresses.txt", "a")
         data = fileReader(self.file)
         ex_ips = list(set(re.findall(r'[0-9]+(?:\.[0-9]+){3}', data)))
         ex_ips += list(set(re.findall(r'[0-9]+(?:\.[0-9]+){3}:[0-9]+', data)))
@@ -75,41 +75,23 @@ class Extractor:
                 ips.write(ip.strip()+"\n")
 
     def domainsEX(self):
-        domains = open(sys.argv[1]+"/domains.txt", "a")
+        domains = open(sys.argv[1]+"/domains_names.txt", "a")
         data = fileReader(self.file)
-        ex_domains = list(
-            set(re.findall(r'(?:(?:[A-Z0-9][A-Z0-9-]{0,61}[A-Z0-9]\.)+)', data)))
+        ex_domains = list(set(re.findall(r'/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/img', data)))
 
         for domain in ex_domains:
             domains.write(domain.strip()+"\n")
 
-    def queriesEX(self):
-        queries = open(sys.argv[1]+"/query.txt", "a")
-        data = fileReader(self.file)
-        ex_queries = list(set(re.findall(r'(?:(\/\S+)*)', data)))
-
-        for query in ex_queries:
-            queries.write(query.strip()+"\n")
-
     def portsEX(self):
         ports = open(sys.argv[1]+"/ports.txt", "a")
         data = fileReader(self.file)
-        ex_ports = list(set(re.findall(r'(?::(\d{1,5}))?', data)))
+        ex_ports = list(set(re.findall(r'[0-9]+(?:\.[0-9]+){3}:[0-9]+[0-9]?', data)))
 
         for port in ex_ports:
             ports.write(port.strip()+"\n")
 
-    def sachaEX(self):
-        sacha = open(sys.argv[1]+"/scheme.txt", "a")
-        data = fileReader(self.file)
-        ex_sacha = list(set(re.findall(
-            r'(?:(www?|https?|s?ftp):\/\/)?', data)))
-
-        for sach in ex_sacha:
-            sacha.write(sach.strip()+"\n")
-
     def jsonEX(self):
-        json = open(sys.argv[1]+"/www.txt", "a")
+        json = open(sys.argv[1]+"/json.txt", "a")
         data = fileReader(self.file)
         ex_json = list(set(re.findall(r'(:\s*(.+?)\s+Source:\s*(.+?)\s+Timestamp:?<!^)Message:\s*.*', data)))
 
@@ -117,9 +99,8 @@ class Extractor:
             www.write(ww.strip()+"\n")
 
     def interes_files(self):
-        int_files = open(sys.argv[1]+"/userpass.txt", "a")
-        words = ['base_url', "ftp_", "db_", "dump", "_db_", "passwd_", "user", "pass", "user_pass", "user_name",
-                 "smtp_", "passwd", "_passwd", "select", "put", "edit", "add", "gopher://", "mysql://", "ftp://"]
+        int_files = open(sys.argv[1]+"/interestingdata.txt", "a")
+        words = ['base_url', "mode", "ftp", "_db", "\/api", "api\/", "api", "ssh", "config", "admin", "php", "db_", "dump", "_db_", "passwd_", "user", "pass", "user_pass", "user_name", "smtp_", "passwd", "_passwd", "select", "put", "edit", "add", "gopher://", "mysql://", "ftp://"]
         data = fileReader(self.file)
         for word in words:
             if word.upper() in data or word.lower() in data:
@@ -133,8 +114,8 @@ if __name__ == '__main__':
         EX.urlsEX()
         EX.ipsEX()
         EX.domainsEX()
-        EX.queriesEX()
+#        EX.queriesEX()
         EX.portsEX()
-        EX.sachaEX()
+#        EX.sachaEX()
         EX.jsonEX()
 EX.interes_files()
