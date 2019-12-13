@@ -57,16 +57,19 @@ class Extractor:
         urls = open(sys.argv[1]+"/url.txt", "a")
         data = fileReader(self.file)
         ex_urls = list(set(re.findall(
-            r'(?:http?|ftp|www):\/\/[\w/\-?=%.]+\.[\w/\-?=%.]+', data)))
+            r'(?:http?|ftp|www|subdomain|domain|app|.):\/\/[\w/\-?=%.]+\.[\w/\-?=%.]+', data)))
+        ex_urls = list(set(re.findall(
+            r'(?:http?|ftp|www|subdomain|domain|app|.)[\w/\-?=%.]+\.[\w/\-?=%.]+', data)))
+        ex_urls = list(set(re.findall(
+            r'(?:http?|ftp|www|subdomain|domain|app|.)-[\w/\-?=%.]+\.[\w/\-?=%.]+', data)))
 
         for url in ex_urls:
             if len(url) < 2:
                 pass
             else:
                 urls.write(url.strip()+"\n")
-
     def ipsEX(self):
-        ips = open(sys.argv[1]+"/ip_addresses.txt", "a")
+        ips = open(sys.argv[1]+"/ip_list.txt", "a")
         data = fileReader(self.file)
         ex_ips = list(set(re.findall(r'[0-9]+(?:\.[0-9]+){3}', data)))
         ex_ips += list(set(re.findall(r'[0-9]+(?:\.[0-9]+){3}:[0-9]+', data)))
@@ -91,7 +94,7 @@ class Extractor:
             ports.write(port.strip()+"\n")
 
     def jsonEX(self):
-        json = open(sys.argv[1]+"/fuzz.txt", "a")
+        json = open(sys.argv[1]+"/json_list.txt", "a")
         data = fileReader(self.file)
         ex_json = list(set(re.findall(r'^(\/[a-z][a-zA-z]+)+$', data)))
 
