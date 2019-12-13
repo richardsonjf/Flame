@@ -14,6 +14,15 @@ rm hidden_username_result.txt
 grep "/api/" -r Results/ > hidden_api_result.txt
 cp hidden_api_result.txt Results/
 rm hidden_api_result.txt
+grep "_api" -r Results/ > hidden_api2_result.txt
+cp hidden_api2_result.txt Results/
+rm hidden_api2_result.txt
+grep "_api_" -r Results/ > hidden_api3_result.txt
+cp hidden_api3_result.txt Results/
+rm hidden_api3_result.txt
+grep "api_" -r Results/ > hidden_api4_result.txt
+cp hidden_api4_result.txt Results/
+rm hidden_api4_result.txt
 grep "/spi/" -r Results/ > hidden_spi_result.txt
 cp hidden_spi_result.txt Results/
 rm hidden_spi_result.txt
@@ -29,3 +38,9 @@ rm hidden_gopher_result.txt
 grep "EndPoint" -r Results/ > hidden_EndPoint_result.txt
 cp hidden_EndPoint_result.txt Results/
 rm hidden_EndPoint_result.txt
+grep "bucket" -r Results/ > hidden_bucket_result.txt
+cp hidden_bucket_result.txt Results/
+rm hidden_bucket_result.txt
+grep "storage" -r Results/ > hidden_storage_result.txt
+cp hidden_storage_result.txt Results/
+rm hidden_storage_result.txt
