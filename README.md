@@ -9,6 +9,9 @@
 # Data Extraction List
 - Endpoints
 - URLs
+- SQL Information
+- Hidden Domains
+- Usernames,Passwords
 - Query paths 
 - Ports
 - API
