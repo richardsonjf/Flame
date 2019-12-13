@@ -94,6 +94,6 @@ python3 flame.py $dist_dir $Tool
 echo "[+] Extracting data at Results Folder"
 echo "[+] Data Dumped Successful"
 echo "[+] Checking Hidden Domains and Saving Results"
-./hidden.sh
+./AI_checker.sh
 echo "";
 echo "";
