@@ -2,7 +2,7 @@
 grep "domain" -r Results/ > hidden_domains_result.txt
 cp hidden_domains_result.txt Results/
 rm hidden_domains_result.txt
-grep "SELECT username FROM" -r Results/ > hidden_sql_result.txt
+grep "SELECT" -r Results/ > hidden_sql_result.txt
 cp hidden_sql_result.txt Results/
 rm hidden_sql_result.txt
 grep "password" -r Results/ > hidden_password_result.txt
