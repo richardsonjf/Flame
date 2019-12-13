@@ -58,16 +58,13 @@ class Extractor:
         data = fileReader(self.file)
         ex_urls = list(set(re.findall(
             r'(?:http?|ftp|www|subdomain|domain|app|.):\/\/[\w/\-?=%.]+\.[\w/\-?=%.]+', data)))
-        ex_urls = list(set(re.findall(
-            r'(?:http?|ftp|www|subdomain|domain|app|.)[\w/\-?=%.]+\.[\w/\-?=%.]+', data)))
-        ex_urls = list(set(re.findall(
-            r'(?:http?|ftp|www|subdomain|domain|app|.)-[\w/\-?=%.]+\.[\w/\-?=%.]+', data)))
 
         for url in ex_urls:
             if len(url) < 2:
                 pass
             else:
                 urls.write(url.strip()+"\n")
+
     def ipsEX(self):
         ips = open(sys.argv[1]+"/ip_list.txt", "a")
         data = fileReader(self.file)
@@ -77,14 +74,6 @@ class Extractor:
         for ip in ex_ips:
                 ips.write(ip.strip()+"\n")
 
-    def domainsEX(self):
-        domains = open(sys.argv[1]+"/domains_names.txt", "a")
-        data = fileReader(self.file)
-        ex_domains = list(set(re.findall(r'/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)?/', data)))
-
-        for domain in ex_domains:
-            domains.write(domain.strip()+"\n")
-
     def portsEX(self):
         ports = open(sys.argv[1]+"/ports.txt", "a")
         data = fileReader(self.file)
@@ -93,17 +82,10 @@ class Extractor:
         for port in ex_ports:
             ports.write(port.strip()+"\n")
 
-    def jsonEX(self):
-        json = open(sys.argv[1]+"/json_list.txt", "a")
-        data = fileReader(self.file)
-        ex_json = list(set(re.findall(r'^(\/[a-z][a-zA-z]+)+$', data)))
-
-        for json in ex_json:
-            www.write(ww.strip()+"\n")
 
     def interes_files(self):
         int_files = open(sys.argv[1]+"/interestingdata.txt", "a")
-        words = ['base_url', "source", "Source", "Timestamp", "timestgap", "message", "Message", "mode", "ftp", "_db", "\/api", "api\/", "api", "ssh", "config", "admin", "php", "db_", "dump", "_db_", "passwd_", "user", "pass", "user_pass", "user_name", "smtp_", "passwd", "_passwd", "select", "put", "edit", "add", "gopher://", "mysql://", "ftp://"]
+        words = ['base_url', "google_api_key", "<domain","includeSubdomains","domain","</domain>","sub","google_crash_repoting_api_key","google_storage_bucket","facebook_api_key","facebook_api","SELECT","username FROM","execSQL","source","Source","Timestamp","timestgap","message","Message","mode","ftp","_db|/api","api","api","ssh","config","admin","php","db","dump","_db","passwd_","user","pass","user_pass","user_name","smtp_","passwd","_passwd","select","put","dit","add","gopher://","mysql://","ftp://,","source", "Source", "Timestamp", "timestgap", "message", "Message", "mode", "ftp", "_db", "\/api", "api\/", "api", "ssh", "config", "admin", "php", "db_", "dump", "_db_", "passwd_", "user", "pass", "user_pass", "user_name", "smtp_", "passwd", "_passwd", "select", "put", "edit", "add", "gopher://", "mysql://", "ftp://"]
         data = fileReader(self.file)
         for word in words:
             if word.upper() in data or word.lower() in data:
@@ -116,7 +98,5 @@ if __name__ == '__main__':
         EX.emailEX()
         EX.urlsEX()
         EX.ipsEX()
-        EX.domainsEX()
         EX.portsEX()
-        EX.jsonEX()
 EX.interes_files()
