@@ -44,3 +44,11 @@ rm hidden_bucket_result.txt
 grep "storage" -r Results/ > hidden_storage_result.txt
 cp hidden_storage_result.txt Results/
 rm hidden_storage_result.txt
+grep "http://" -r Results/ > hidden_http_result.txt
+cp hidden_http_result.txt Results/
+rm hidden_http_result.txt
+grep "https://" -r Results/ > hidden_https_result.txt
+cp hidden_https_result.txt Results/
+rm hidden_https_result.txt
+echo "[HINT] Check /res/values and /res/xml folder, if exists!"
+echo "";
