@@ -19,10 +19,9 @@ cat << "EOF"
     ||| /          /|| I==||
     ||| \       __/_||  __||__
 -----||-/------`-._/||-o--o---o---
-> \ /           Tool     :  Flame v1.0
-(_,-'`> .'      Author   :  0xPwny
-(_,'            Update   :  Haroon Awan / mrharoonawan@gmail.com
-                Usage    :  ./Flame.sh jadx/apktool file.apk
+> \ /           Flame    :  A.I for Android Application Security
+(_,-'`> .'      Authors  :  0xPwny - Haroon Awan / mrharoonawan@gmail.com
+(_,'            Usage    :  flame jadx/apktool file.apk
 EOF
 
 
@@ -91,8 +90,10 @@ exit
 fi
 
 echo "[+] Application Successfully Decompiled "
-python3 Flame.py $dist_dir $Tool
-echo "[+] Extracted data saved at Results Folder"
+python3 flame.py $dist_dir $Tool
+echo "[+] Extracting data at Results Folder"
 echo "[+] Data Dumped Successful"
+echo "[+] Checking Hidden Domains and Saving Results"
+./hidden.sh
 echo "";
 echo "";
