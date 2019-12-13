@@ -90,7 +90,7 @@ exit
 fi
 
 echo "[+] Application Successfully Decompiled "
-python3 flame.py $dist_dir $Tool
+python3 Flame.py $dist_dir $Tool
 echo "[+] Extracting data at Results Folder"
 echo "[+] Data Dumped Successful"
 echo "[+] Checking Hidden Domains and Saving Results"
